@@ -1,7 +1,6 @@
+import { TEST_URL } from "@/routes";
+import { redirect } from "next/navigation";
+
 export default function Home() {
-  return (
-    <main>
-      <h1>Home</h1>
-    </main>
-  );
+  redirect(TEST_URL);
 }

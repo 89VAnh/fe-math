@@ -1,11 +1,11 @@
 "use client";
 import { PasswordIcon, UserIcon } from "@/assets";
-import { loginFetcher } from "@/helper/fetcher/account.fetcher";
+import { useLogin } from "@/helper/data/account.loader";
 import { login } from "@/lib/account.action";
-import { Checkbox } from "@nextui-org/react";
+import { SIGNUP_URL } from "@/routes";
+import { Button, Checkbox } from "@nextui-org/react";
 import Link from "next/link";
 import { useState } from "react";
-import useSWR from "swr";
 
 export default function LoginForm() {
   const [account, setAccount] = useState<{
@@ -13,11 +13,7 @@ export default function LoginForm() {
     password: string;
   } | null>(null);
 
-  const { error } = useSWR(account, loginFetcher, {
-    onSuccess: (data) => {
-      if (data !== null) login(data);
-    },
-  });
+  const { trigger, error, isMutating } = useLogin();
 
   const hadleLogin = (formData: FormData) => {
     const payload = {
@@ -25,7 +21,9 @@ export default function LoginForm() {
       password: formData.get("password")?.toString() || "",
     };
 
-    setAccount(payload);
+    trigger(payload).then((data) => {
+      login(data);
+    });
   };
 
   return (
@@ -89,16 +87,17 @@ export default function LoginForm() {
       </div>
 
       <div className='mb-4.5'>
-        <button
+        <Button
           type='submit'
-          className='flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-primary p-4 font-medium text-white transition hover:bg-opacity-90'>
+          isLoading={isMutating}
+          className='flex w-full rounded-lg bg-primary p-4 font-medium text-white'>
           Đăng nhập
-        </button>
+        </Button>
       </div>
 
       <div>
         <Link
-          href='/signin'
+          href={SIGNUP_URL}
           className='select-none font-satoshi text-base font-medium text-dark underline duration-300 hover:text-primary dark:text-white dark:hover:text-primary'
           replace>
           Tạo tài khoản mới

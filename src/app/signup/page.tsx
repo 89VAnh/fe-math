@@ -5,8 +5,8 @@ import Link from "next/link";
 import React from "react";
 
 export const metadata: Metadata = {
-  title: "Login Page | Math",
-  description: "Math Login Page",
+  title: "Sign Up Page | Math",
+  description: "Math Sign Up Page",
 };
 
 const SignIn: React.FC = () => {
@@ -41,7 +41,7 @@ const SignIn: React.FC = () => {
                 />
               </Link>
               <p className='mb-3 text-xl font-medium text-dark dark:text-white'>
-                Đăng nhập vào tài khoản của bạn
+                Đăng ký tài khoản mới
               </p>
 
               <h1 className='mb-4 text-2xl font-bold text-dark dark:text-white sm:text-heading-3'>

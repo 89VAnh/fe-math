@@ -6,23 +6,16 @@ import {
   PhoneIcon,
   UserIcon,
 } from "@/assets";
-import { registerFetcher } from "@/helper/fetcher/account.fetcher";
+import { useRegister } from "@/helper/data/account.loader";
 import { signup } from "@/lib/account.action";
+import { LOGIN_URL } from "@/routes";
+import { Button } from "@nextui-org/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import useSWR from "swr";
 
 export default function SignupForm() {
-  const [account, setAccount] = useState<any>();
   const [error, setError] = useState<any>("");
-
-  const { error: signupError } = useSWR(account, registerFetcher, {
-    onSuccess: (data) => {
-      console.log(data);
-      if (data) console.log(123);
-      if (data) signup();
-    },
-  });
+  const { trigger, error: signupError, isMutating } = useRegister();
 
   useEffect(() => {
     setError(signupError?.response?.data?.message);
@@ -33,7 +26,9 @@ export default function SignupForm() {
 
     if (data.password === data.repassword) {
       delete data.repassword;
-      setAccount(data);
+      trigger(data).then((data) => {
+        if (data) signup();
+      });
     } else {
       setError("Mật khẩu không khớp");
     }
@@ -172,16 +167,17 @@ export default function SignupForm() {
       )}
 
       <div className='mb-4.5'>
-        <button
+        <Button
+          isLoading={isMutating}
           type='submit'
           className='flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-primary p-4 font-medium text-white transition hover:bg-opacity-90'>
           Đăng ký
-        </button>
+        </Button>
       </div>
 
       <div>
         <Link
-          href='/login'
+          href={LOGIN_URL}
           className='select-none font-satoshi text-base font-medium text-dark underline duration-300 hover:text-primary dark:text-white dark:hover:text-primary'
           replace>
           Bạn đã có tài khoản

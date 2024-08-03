@@ -4,6 +4,7 @@ import { MenuIcon, UserIcon } from "@/assets";
 import ClickOutside from "@/components/ClickOutside";
 import SidebarItem from "@/components/Sidebar/SidebarItem";
 import useLocalStorage from "@/hooks/useLocalStorage";
+import { FORUM_URL, HISTORY_URL, TEST_URL } from "@/routes";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -20,33 +21,18 @@ const menuGroups = [
     menuItems: [
       {
         icon: <UserIcon />,
-        label: "Quản lý người dùng",
-        route: "/user",
+        label: "Giải đề",
+        route: TEST_URL,
       },
       {
         icon: <UserIcon />,
-        label: "Quản lý câu hỏi",
-        route: "/user",
+        label: "Lịch sử làm bài",
+        route: HISTORY_URL,
       },
       {
         icon: <UserIcon />,
-        label: "Quản lý đề trắc nghiệm",
-        route: "/user",
-      },
-      {
-        icon: <UserIcon />,
-        label: "Quản lý cấp bậc (Lớp)",
-        route: "/user",
-      },
-      {
-        icon: <UserIcon />,
-        label: "Lịch sử, kết quả",
-        route: "/user",
-      },
-      {
-        icon: <UserIcon />,
-        label: "Thống kê",
-        route: "/user",
+        label: "Diễn đàn",
+        route: FORUM_URL,
       },
     ],
   },

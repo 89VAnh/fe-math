@@ -8,3 +8,8 @@ export type Account = {
   role: number;
   token?: string;
 };
+export type SearchAccount = {
+  page: number;
+  pageSize: number;
+  name?: string;
+};

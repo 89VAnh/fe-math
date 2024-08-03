@@ -7,7 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/react";
-import React, { Key, useEffect } from "react";
+import React, { Key } from "react";
 
 type Column<T> = {
   key: string;
