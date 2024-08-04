@@ -43,7 +43,7 @@ export default function Page() {
                 width='100%'
                 alt={item.id}
                 className='w-full object-cover h-[140px]'
-                src={BASE_URL + "/" + item.image}
+                src={item.image}
               />
             </CardBody>
             <CardFooter className='flex-col items-start text-start'>
