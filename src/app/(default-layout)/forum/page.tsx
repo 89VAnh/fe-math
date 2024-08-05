@@ -21,13 +21,15 @@ export default function ForumPage() {
   }, []);
   return (
     <div className='h-[80vh] rounded-[10px] border border-stroke bg-white p-4 shadow-1 dark:border-dark-3 dark:bg-gray-dark dark:shadow-card sm:p-7.5 flex flex-col'>
-      <div className='bg-gray-1 flex-1 flex flex-col justify-start'>
-        {data?.data &&
-          data?.data.map((chat: Chat) => (
-            <span key={chat.id}>
-              {chat.user} : {chat.content}
-            </span>
-          ))}
+      <div className='bg-gray-1 flex-1 flex flex-col justify-end'>
+        <div className='flex flex-col justify-end'>
+          {data?.data &&
+            data?.data.map((chat: Chat) => (
+              <span key={chat.id}>
+                {chat.user} : {chat.content}
+              </span>
+            ))}
+        </div>
       </div>
       <form
         className='bg-gray-1'
