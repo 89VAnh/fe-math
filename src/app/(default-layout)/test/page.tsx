@@ -13,11 +13,7 @@ export default function Page() {
   const PAGE_SIZE = 10;
   const router = useRouter();
 
-  const {
-    data,
-    isLoading,
-    mutate: searchMutate,
-  } = useSearchTest({
+  const { data, isLoading } = useSearchTest({
     page,
     pageSize: PAGE_SIZE,
     searchContent,

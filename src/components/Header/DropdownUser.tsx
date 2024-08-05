@@ -48,7 +48,7 @@ const DropdownUser = () => {
       {/* <!-- Dropdown Star --> */}
       {dropdownOpen && (
         <div
-          className={`absolute right-0 mt-7.5 flex w-[280px] flex-col rounded-lg border-[0.5px] border-stroke bg-white shadow-default dark:border-dark-3 dark:bg-gray-dark`}>
+          className={`absolute right-0 mt-7.5 flex w-[280px] flex-col rounded-lg border-[0.5px] border-stroke bg-white shadow-default dark:border-dark-3 dark:bg-gray-dark z-20`}>
           <div className='flex items-center gap-2.5 px-5 pb-5.5 pt-3.5'>
             <span className='relative block h-12 w-12 rounded-full'>
               <Image

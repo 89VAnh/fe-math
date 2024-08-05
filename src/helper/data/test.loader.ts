@@ -1,5 +1,7 @@
+import { Test } from "@/types/Test";
 import useSWR from "swr";
-import { getFetcher } from "../fetcher";
+import useSWRMutation from "swr/mutation";
+import { getFetcher, postFetcher } from "../fetcher";
 
 const prefix = "test";
 
@@ -18,7 +20,14 @@ export function useSearchTest(params: any) {
 export function useGetTest(id: string) {
   const { data, isLoading, error } = useSWR(`${prefix}/${id}`, getFetcher);
 
-  console.log(data?.questions);
-
   return { data, isLoading, error };
+}
+
+export function useSubmitTest() {
+  const { trigger, error, isMutating } = useSWRMutation(
+    `${prefix}/submit`,
+    postFetcher
+  );
+
+  return { trigger, error, isMutating };
 }
