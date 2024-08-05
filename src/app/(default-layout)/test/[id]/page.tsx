@@ -2,7 +2,6 @@
 import { ClockIcon } from "@/assets";
 import { useGetTest, useSubmitTest } from "@/helper/data/test.loader";
 import { getUser } from "@/lib/account.action";
-import { useSubmitTestStore } from "@/store";
 import { Account } from "@/types/Account";
 import { Question } from "@/types/Question";
 import {
