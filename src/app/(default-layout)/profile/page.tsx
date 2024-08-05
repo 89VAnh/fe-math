@@ -37,19 +37,31 @@ export default function ProfilePage() {
         </div>
         <form
           action={async (formData: FormData) => {
-            const file = formData.get("profilePhoto") as File;
-            const dataFile = await uploadFile({ file });
-            const payload = {
-              username: formData.get("username"),
-              email: formData.get("email"),
-              name: formData.get("name"),
-              phone: formData.get("phone"),
-              avatar: dataFile?.path,
-            };
-
-            trigger(payload).then((user) => {
-              login(user);
-            });
+            try {
+              const file = formData.get("profilePhoto") as File;
+              const dataFile = await uploadFile({ file });
+              const payload = {
+                username: formData.get("username"),
+                email: formData.get("email"),
+                name: formData.get("name"),
+                phone: formData.get("phone"),
+                avatar: dataFile?.path,
+              };
+              trigger(payload).then((user) => {
+                login(user);
+              });
+            } catch {
+              const payload = {
+                username: formData.get("username"),
+                email: formData.get("email"),
+                name: formData.get("name"),
+                phone: formData.get("phone"),
+                avatar: user?.avatar,
+              };
+              trigger(payload).then((user) => {
+                login(user);
+              });
+            }
           }}>
           <div className='px-4 pb-6 text-center lg:pb-8 xl:pb-11.5'>
             <div className='relative z-30 mx-auto -mt-22 h-30 w-full max-w-30 rounded-full bg-white/20 p-1 backdrop-blur sm:h-44 sm:max-w-[176px] sm:p-3'>
@@ -111,31 +123,37 @@ export default function ProfilePage() {
                 />
               </div>
               <div className='flex-1'>
-                <Input
-                  type='email'
-                  label='Email'
-                  labelPlacement='outside'
-                  defaultValue={user.email}
-                  name='email'
-                />
+                {user?.email && (
+                  <Input
+                    type='email'
+                    label='Email'
+                    labelPlacement='outside'
+                    defaultValue={user.email}
+                    name='email'
+                  />
+                )}
               </div>
             </div>
             <div className='flex gap-4 mt-8'>
               <div className='flex-1'>
-                <Input
-                  label='Tên'
-                  labelPlacement='outside'
-                  value={user.name}
-                  name='name'
-                />
+                {user?.name && (
+                  <Input
+                    label='Tên'
+                    labelPlacement='outside'
+                    defaultValue={user?.name}
+                    name='name'
+                  />
+                )}
               </div>
               <div className='flex-1'>
-                <Input
-                  label='SĐT'
-                  labelPlacement='outside'
-                  defaultValue={user.phone}
-                  name='phone'
-                />
+                {user?.phone && (
+                  <Input
+                    label='SĐT'
+                    labelPlacement='outside'
+                    defaultValue={user?.phone}
+                    name='phone'
+                  />
+                )}
               </div>
             </div>
             <Spacer y={4} />
