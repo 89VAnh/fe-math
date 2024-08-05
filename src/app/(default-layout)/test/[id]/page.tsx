@@ -40,7 +40,6 @@ export default function Page({ params }: { params: { id: string } }) {
   const [startTime, setStartTime] = useState<Date>();
   const [timerEnd, setTimerEnd] = useState(false);
   const router = useRouter();
-  const setSubmitTest = useSubmitTestStore((state: any) => state.set);
 
   useEffect(() => {
     getUser().then((user) => {
@@ -71,7 +70,7 @@ export default function Page({ params }: { params: { id: string } }) {
   };
 
   const btnSubmitRef = useRef<HTMLButtonElement>(null);
-
+  const regex = /<p>(.*?)<\/p>/g;
   return (
     <div className='rounded-[10px] border border-stroke bg-white p-4 shadow-1 dark:border-dark-3 dark:bg-gray-dark dark:shadow-card sm:p-7.5'>
       <div className='flex justify-between'>
@@ -116,16 +115,27 @@ export default function Page({ params }: { params: { id: string } }) {
             <div>
               <RadioGroup name={question.id.toString()} isRequired={true}>
                 <Radio value='A'>
-                  <Latex> {question.answerA}</Latex>
+                  <Latex>
+                    {question.answerA.replace(regex, (match, p1) => `$${p1}$`)}
+                  </Latex>
                 </Radio>
                 <Radio value='B'>
-                  <Latex>{question.answerB}</Latex>
+                  <Latex>
+                    ${question.answerB.replace(regex, (match, p1) => `$${p1}$`)}
+                    $
+                  </Latex>
                 </Radio>
                 <Radio value='C'>
-                  <Latex>{question.answerC}</Latex>
+                  <Latex>
+                    ${question.answerC.replace(regex, (match, p1) => `$${p1}$`)}
+                    $
+                  </Latex>
                 </Radio>
                 <Radio value='D'>
-                  <Latex>{question.answerD}</Latex>
+                  <Latex>
+                    ${question.answerD.replace(regex, (match, p1) => `$${p1}$`)}
+                    $
+                  </Latex>
                 </Radio>
               </RadioGroup>
             </div>

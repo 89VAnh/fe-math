@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
-import { getFetcher, postFetcher } from "../fetcher";
+import { getFetcher, patchFetcher, postFetcher, putFetcher } from "../fetcher";
 const prefix = "account";
 
 export function useLogin() {
@@ -31,4 +31,19 @@ export function useSearchAccount(params: any) {
   );
 
   return { data, isLoading, error, mutate };
+}
+
+export function useChangePassword() {
+  const { trigger, isMutating } = useSWRMutation(
+    `${prefix}/change-password`,
+    patchFetcher
+  );
+
+  return { trigger, isMutating };
+}
+
+export function useUpdateAccount() {
+  const { trigger, isMutating } = useSWRMutation(prefix, putFetcher);
+
+  return { trigger, isMutating };
 }

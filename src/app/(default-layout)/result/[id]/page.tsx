@@ -15,6 +15,8 @@ export default function ResultPage() {
   const testSubmit = useMemo(() => {
     if (result) return JSON.parse(result?.testSubmit);
   }, [result]);
+  const regex = /<p>(.*?)<\/p>/g;
+
   return (
     <div className='rounded-[10px] border border-stroke bg-white p-4 shadow-1 dark:border-dark-3 dark:bg-gray-dark dark:shadow-card sm:p-7.5'>
       <h2 className='text-2xl font-bold text-center text-green-700 dark:text-green-400'>
@@ -43,7 +45,9 @@ export default function ResultPage() {
                       ? ""
                       : "text-red-700"
                   }>
-                  <Latex> {question.answerA}</Latex>
+                  <Latex>
+                    {question.answerA.replace(regex, (match, p1) => `$${p1}$`)}
+                  </Latex>
                 </li>
                 <li
                   key={question.id + " B"}
@@ -54,7 +58,9 @@ export default function ResultPage() {
                       ? ""
                       : "text-red-700"
                   }>
-                  <Latex>{question.answerB}</Latex>
+                  <Latex>
+                    {question.answerB.replace(regex, (match, p1) => `$${p1}$`)}
+                  </Latex>
                 </li>
                 <li
                   key={question.id + " C"}
@@ -65,7 +71,9 @@ export default function ResultPage() {
                       ? ""
                       : "text-red-700"
                   }>
-                  <Latex>{question.answerC}</Latex>
+                  <Latex>
+                    {question.answerC.replace(regex, (match, p1) => `$${p1}$`)}
+                  </Latex>
                 </li>
                 <li
                   key={question.id + " D"}
@@ -76,7 +84,9 @@ export default function ResultPage() {
                       ? ""
                       : "text-red-700"
                   }>
-                  <Latex>{question.answerD}</Latex>
+                  <Latex>
+                    {question.answerD.replace(regex, (match, p1) => `$${p1}$`)}
+                  </Latex>
                 </li>
               </ul>
             </div>
