@@ -17,6 +17,7 @@ import {
   useDisclosure,
   user,
 } from "@nextui-org/react";
+import "katex/dist/katex.min.css";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Countdown from "react-countdown";
@@ -83,18 +84,20 @@ export default function Page({ params }: { params: { id: string } }) {
         <div className='flex items-center gap-4'>
           <ClockIcon />
 
-          <Countdown
-            date={Date.now() + test?.duration * 60 * 1000}
-            renderer={({ minutes, seconds }) => (
-              <span>
-                {minutes}:{seconds}
-              </span>
-            )}
-            onComplete={() => {
-              btnSubmitRef.current?.click();
-              setTimerEnd(true);
-            }}
-          />
+          {test?.duration && (
+            <Countdown
+              date={Date.now() + test?.duration * 60 * 1000}
+              renderer={({ minutes, seconds }) => (
+                <span>
+                  {minutes}:{seconds}
+                </span>
+              )}
+              onComplete={() => {
+                btnSubmitRef.current?.click();
+                setTimerEnd(true);
+              }}
+            />
+          )}
         </div>
       </div>
       <form
@@ -110,7 +113,10 @@ export default function Page({ params }: { params: { id: string } }) {
         {test?.questions.map((question: Question, index: number) => (
           <div key={question.id}>
             <div className='flex my-4'>
-              <b>Câu {index + 1} : </b> <Latex>{question.content.trim()}</Latex>
+              <b>Câu {index + 1} : </b>{" "}
+              <Latex>
+                {question.content.replace(regex, (match, p1) => `$${p1}$`)}
+              </Latex>
             </div>
             <div>
               <RadioGroup name={question.id.toString()} isRequired={true}>

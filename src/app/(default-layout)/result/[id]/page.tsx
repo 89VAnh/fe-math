@@ -3,6 +3,7 @@ import { useGetResult } from "@/helper/data/result.loader";
 import { useGetTest } from "@/helper/data/test.loader";
 import { Question } from "@/types/Question";
 import { Button, Card, Radio, RadioGroup } from "@nextui-org/react";
+import "katex/dist/katex.min.css";
 import { useParams, useRouter } from "next/navigation";
 import React, { useMemo } from "react";
 import Latex from "react-latex-next";

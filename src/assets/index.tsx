@@ -12,6 +12,7 @@ import PasswordIcon from "./password.svg";
 import PhoneIcon from "./phone.svg";
 import PlusIcon from "./plus.svg";
 import SearchIcon from "./search.svg";
+import SendIcon from "./send.svg";
 import SettingIcon from "./setting.svg";
 import SunIcon from "./sun.svg";
 import UserIcon from "./user.svg";
@@ -31,6 +32,7 @@ export {
   PhoneIcon,
   PlusIcon,
   SearchIcon,
+  SendIcon,
   SettingIcon,
   SunIcon,
   UserIcon,
