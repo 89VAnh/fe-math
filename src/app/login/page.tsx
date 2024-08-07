@@ -5,8 +5,8 @@ import Link from "next/link";
 import React from "react";
 
 export const metadata: Metadata = {
-  title: "Login Page | Math",
-  description: "Math Login Page",
+  title: "Đăng nhập | Trắc nghiệm toán",
+  description: "Trang đăng nhập",
 };
 
 const SignIn: React.FC = () => {
