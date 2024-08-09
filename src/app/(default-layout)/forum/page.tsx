@@ -31,10 +31,10 @@ export default function ForumPage() {
       <div className='flex justify-center mb-4'>
         <h2 className='text-6xl text-primary font-bold'>Diễn đàn</h2>
       </div>
-      <div className='bg-gray-1 flex-1 flex flex-col justify-end overflow-scroll'>
+      <div className='bg-gray-1 flex-1 flex flex-col overflow-scroll'>
         <div className='overflow-scroll'>
           {data?.data &&
-            data?.data.map((chat: any) => (
+            data?.data.reverse().map((chat: any) => (
               <div
                 className={`flex my-4 gap-2 ${
                   chat.user === user.name ? "flex-row-reverse" : ""
@@ -49,7 +49,10 @@ export default function ForumPage() {
                   />
                 )}{" "}
                 <div>
-                  <div className='text-xs text-gray-500 text-end'>
+                  <div
+                    className={`text-xs text-gray-500 ${
+                      chat.user === user.name ? "text-end" : ""
+                    }`}>
                     {chat.user}
                   </div>
                   <div className='bg-gray-6 rounded-lg p-3 text-white'>
